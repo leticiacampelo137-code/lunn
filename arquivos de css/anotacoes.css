@@ -1,0 +1,381 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--branco);
+    color: var(--roxo-noturno);
+    font-family: "Rubik", sans-serif;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px max(3vw, 20px);
+    background: var(--roxo-noturno);
+}
+
+.logotipo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--branco);
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.logotipo img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-links a,
+.logout-link {
+    color: var(--branco);
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.area-anotacoes {
+    width: min(1120px, 94%);
+    margin: 34px auto 56px;
+}
+
+.cabecalho-anotacoes,
+.topo-painel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.cabecalho-anotacoes {
+    margin-bottom: 20px;
+}
+
+.etiqueta {
+    color: var(--roxo-lunar);
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.area-anotacoes h1,
+.area-anotacoes h2 {
+    margin: 5px 0;
+    color: var(--roxo-noturno);
+}
+
+.painel-materias,
+.painel-anotacoes,
+.editor-anotacao {
+    padding: 20px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 60%, transparent);
+    border-radius: 10px;
+    background: var(--branco);
+}
+
+.painel-materias {
+    margin-bottom: 18px;
+}
+
+#form-materia {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#form-materia input[type="text"],
+#form-anotacao input[type="text"],
+#form-anotacao select,
+.editar-materia input[type="text"] {
+    min-height: 40px;
+    padding: 8px 10px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 60%, transparent);
+    border-radius: 8px;
+    background: var(--branco);
+    color: var(--roxo-noturno);
+    font: inherit;
+}
+
+#form-materia input[type="text"] {
+    width: min(260px, 42vw);
+}
+
+#form-materia input[type="color"],
+.editar-materia input[type="color"] {
+    width: 44px;
+    height: 40px;
+    padding: 3px;
+    border: 1px solid var(--lilas-suave);
+    border-radius: 8px;
+    background: var(--branco);
+}
+
+button {
+    min-height: 38px;
+    padding: 8px 12px;
+    border: 1px solid var(--roxo-lunar);
+    border-radius: 8px;
+    background: var(--roxo-lunar);
+    color: var(--branco);
+    font: inherit;
+    font-size: 0.88rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--roxo-noturno);
+    border-color: var(--roxo-noturno);
+}
+
+.botao-secundario {
+    background: var(--branco);
+    color: var(--roxo-noturno);
+}
+
+.lista-materias {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 6px 2px;
+}
+
+.materia-card {
+    display: grid;
+    justify-items: center;
+    gap: 7px;
+    min-width: 112px;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    color: var(--roxo-noturno);
+    text-align: center;
+}
+
+.materia-card.ativa {
+    border-color: var(--lilas-suave);
+    background: color-mix(in srgb, var(--lilas-suave) 18%, var(--branco));
+}
+
+.materia-circulo {
+    display: grid;
+    place-items: center;
+    width: 68px;
+    height: 68px;
+    border: 2px solid var(--branco);
+    border-radius: 50%;
+    color: var(--branco);
+    font-size: 1.35rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.materia-nome,
+.voltar-index,
+.botao-nova-anotacao {
+    color: var(--roxo-lunar);
+    font-size: 0.86rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.editar-materia {
+    width: 100%;
+    text-align: left;
+}
+
+.editar-materia summary {
+    color: var(--roxo-lunar);
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.editar-materia form {
+    display: grid;
+    gap: 7px;
+    margin-top: 8px;
+}
+
+.editar-materia label,
+#form-anotacao label {
+    color: var(--roxo-noturno);
+    font-size: 0.86rem;
+    font-weight: 600;
+}
+
+.editar-materia input[type="text"] {
+    width: 100%;
+}
+
+.editar-materia input[type="color"] {
+    width: 100%;
+}
+
+.editar-materia button,
+.materia-card > form button {
+    width: 100%;
+    padding: 6px;
+    font-size: 0.78rem;
+}
+
+.erros-formulario,
+.errorlist {
+    color: var(--roxo-lunar);
+    font-size: 0.8rem;
+    list-style: none;
+}
+
+.layout-editor {
+    display: grid;
+    grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+    gap: 18px;
+    align-items: start;
+}
+
+#lista-anotacoes {
+    display: grid;
+    gap: 8px;
+}
+
+.item-anotacao {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 50%, transparent);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--lilas-suave) 14%, var(--branco));
+    color: var(--roxo-noturno);
+    text-align: left;
+    text-decoration: none;
+}
+
+.item-anotacao.ativa {
+    border-color: var(--roxo-lunar);
+}
+
+.item-anotacao strong,
+.item-anotacao span {
+    display: block;
+}
+
+.item-anotacao span,
+.vazio {
+    margin-top: 5px;
+    color: color-mix(in srgb, var(--roxo-noturno) 68%, transparent);
+    font-size: 0.84rem;
+    line-height: 1.45;
+}
+
+#form-anotacao {
+    display: grid;
+    gap: 10px;
+}
+
+#form-anotacao input[type="text"],
+#form-anotacao select {
+    width: 100%;
+}
+
+.barra-editor {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding: 9px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 55%, transparent);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--lilas-suave) 12%, var(--branco));
+}
+
+.barra-editor button,
+.barra-editor select {
+    min-height: 34px;
+    padding: 6px 9px;
+    border: 1px solid var(--lilas-suave);
+    border-radius: 7px;
+    background: var(--branco);
+    color: var(--roxo-noturno);
+    font: inherit;
+}
+
+.campo-editor {
+    min-height: 260px;
+    padding: 14px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 60%, transparent);
+    border-radius: 8px;
+    background: var(--branco);
+    color: var(--roxo-noturno);
+    line-height: 1.6;
+    outline: none;
+}
+
+.campo-editor:focus {
+    border-color: var(--roxo-lunar);
+}
+
+.campo-editor:empty::before {
+    color: color-mix(in srgb, var(--roxo-noturno) 50%, transparent);
+    content: attr(data-placeholder);
+}
+
+.campo-editor blockquote {
+    margin: 9px 0;
+    padding: 8px 12px;
+    border-left: 3px solid var(--roxo-lunar);
+    background: color-mix(in srgb, var(--lilas-suave) 18%, var(--branco));
+}
+
+.campo-editor ul,
+.campo-editor ol {
+    padding-left: 22px;
+}
+
+.acoes-editor {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.visualmente-oculto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+.campo-editor:focus-visible {
+    outline: 2px solid var(--roxo-lunar);
+    outline-offset: 2px;
+}
+
+@media (max-width: 780px) {
+    header {
+        flex-wrap: wrap;
+        padding: 14px 4%;
+    }
+
+    .layout-editor {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .topo-painel {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

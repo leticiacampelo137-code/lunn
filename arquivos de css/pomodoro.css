@@ -1,0 +1,124 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--branco);
+    color: var(--roxo-noturno);
+    font-family: "Rubik", sans-serif;
+}
+
+.pomodoro {
+    width: min(430px, 90%);
+    margin: 60px auto;
+    padding: 3rem;
+    border-radius: 8px;
+    background: var(--roxo-noturno);
+}
+
+#conometro {
+    display: grid;
+    place-items: center;
+    width: min(100%, 300px);
+    aspect-ratio: 1;
+    margin: 0 auto;
+    border: 3px solid var(--lilas-suave);
+    border-radius: 50%;
+    background: var(--roxo-noturno);
+    color: var(--branco);
+    font-size: 30px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+#botoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.pomodoro button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: var(--lilas-suave);
+    cursor: pointer;
+}
+
+.pomodoro button:hover {
+    background: var(--roxo-noturno);
+}
+
+#botoes img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+#jornadas {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 15px auto 0;
+    padding: 10px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--roxo-lunar);
+    color: var(--branco);
+    font: inherit;
+}
+
+#status-sessao {
+    min-height: 1.3em;
+    margin: 14px 0 0;
+    color: var(--roxo-lunar);
+    font-size: 0.86rem;
+    text-align: center;
+}
+
+button:focus-visible,
+select:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--roxo-lunar);
+    outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+    .pomodoro {
+        margin: 35px auto;
+        width: min(92%, 380px);
+        padding: 2rem;
+    }
+
+    #conometro {
+        width: min(100%, 250px);
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 420px) {
+    .pomodoro {
+        width: min(94%, 340px);
+        margin: 25px auto;
+        padding: 1.5rem;
+    }
+
+    #conometro {
+        width: min(100%, 220px);
+        font-size: 24px;
+    }
+
+    #botoes {
+        gap: 12px;
+    }
+
+    .pomodoro button {
+        width: 44px;
+        height: 44px;
+    }
+}

@@ -1,0 +1,342 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--branco);
+    color: var(--roxo-noturno);
+    font-family: "Rubik", sans-serif;
+}
+
+.container-calendario {
+    width: min(1040px, 94%);
+    margin: 34px auto 60px;
+}
+
+.intro-calendario {
+    margin-bottom: 20px;
+}
+
+.etiqueta-calendario {
+    color: var(--roxo-lunar);
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.intro-calendario h1 {
+    margin: 6px 0;
+    font-size: 1.7rem;
+}
+
+.intro-calendario p,
+.topo-mes p,
+.evento-card p,
+.evento-vazio {
+    color: color-mix(in srgb, var(--roxo-noturno) 68%, transparent);
+    line-height: 1.5;
+}
+
+.painel-calendario,
+.area-eventos {
+    padding: 22px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 60%, transparent);
+    border-radius: 10px;
+    background: var(--branco);
+}
+
+.topo-mes,
+.cabecalho-eventos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.topo-mes h2,
+.cabecalho-eventos h2 {
+    margin: 0;
+    font-size: 1.12rem;
+}
+
+.navegacao-mes,
+.acoes-formulario {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.navegacao-mes button,
+.botao-adicionar,
+.botao-cancelar,
+.evento-acoes button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 8px 12px;
+    border: 1px solid var(--roxo-lunar);
+    border-radius: 8px;
+    background: var(--roxo-lunar);
+    color: var(--branco);
+    font: inherit;
+    font-size: 0.88rem;
+    cursor: pointer;
+}
+
+.navegacao-mes button:hover,
+.botao-adicionar:hover,
+.evento-acoes button:hover {
+    background: var(--roxo-noturno);
+    border-color: var(--roxo-noturno);
+}
+
+.grade-calendario {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 18px;
+}
+
+.cabecalho-semana {
+    padding: 8px 0;
+    color: color-mix(in srgb, var(--roxo-noturno) 68%, transparent);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.dia-calendario {
+    display: flex;
+    min-width: 0;
+    height: 68px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 42%, transparent);
+    border-radius: 8px;
+    background: var(--branco);
+    color: var(--roxo-noturno);
+    font: inherit;
+    cursor: pointer;
+}
+
+.dia-calendario:hover,
+.dia-calendario.hoje {
+    border-color: var(--roxo-lunar);
+}
+
+.dia-calendario.fora-mes {
+    color: color-mix(in srgb, var(--roxo-noturno) 45%, transparent);
+}
+
+.dia-calendario.selecionado {
+    border-color: var(--roxo-lunar);
+    background: var(--roxo-lunar);
+    color: var(--branco);
+}
+
+.numero-dia {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.indicadores-dia {
+    display: flex;
+    gap: 3px;
+}
+
+.ponto {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--roxo-lunar);
+}
+
+.dia-calendario.selecionado .ponto {
+    background: var(--branco);
+}
+
+.legenda-calendario {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 16px;
+    color: color-mix(in srgb, var(--roxo-noturno) 68%, transparent);
+    font-size: 0.8rem;
+}
+
+.legenda-calendario span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.area-eventos {
+    margin-top: 18px;
+}
+
+.cabecalho-eventos {
+    margin-bottom: 16px;
+}
+
+#form-evento {
+    display: grid;
+    gap: 9px;
+    margin-bottom: 18px;
+    padding: 16px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 60%, transparent);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--lilas-suave) 16%, var(--branco));
+}
+
+#form-evento[hidden] {
+    display: none;
+}
+
+#form-evento h3 {
+    margin: 0 0 4px;
+}
+
+#form-evento label {
+    color: var(--roxo-noturno);
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+#form-evento input,
+#form-evento select,
+#form-evento textarea {
+    width: 100%;
+    min-width: 0;
+    min-height: 40px;
+    padding: 9px 11px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 65%, transparent);
+    border-radius: 8px;
+    background: var(--branco);
+    color: var(--roxo-noturno);
+    font: inherit;
+}
+
+#form-evento textarea {
+    resize: vertical;
+}
+
+#form-evento input:focus-visible,
+#form-evento select:focus-visible,
+#form-evento textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--roxo-lunar);
+    outline-offset: 2px;
+}
+
+.botao-cancelar {
+    border-color: var(--lilas-suave);
+    background: var(--branco);
+    color: var(--roxo-noturno);
+}
+
+.botao-cancelar:hover {
+    background: color-mix(in srgb, var(--lilas-suave) 25%, var(--branco));
+}
+
+.lista-eventos {
+    display: grid;
+    gap: 10px;
+}
+
+.evento-card {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 14px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 50%, transparent);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--lilas-suave) 12%, var(--branco));
+}
+
+.evento-conteudo {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.evento-tipo {
+    display: inline-block;
+    margin-bottom: 5px;
+    color: var(--roxo-lunar);
+    font-size: 0.74rem;
+    font-weight: 700;
+}
+
+.evento-card h3 {
+    margin: 0 0 5px;
+    font-size: 0.98rem;
+}
+
+.evento-card p {
+    margin: 4px 0;
+    font-size: 0.86rem;
+}
+
+.evento-acoes {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 7px;
+}
+
+.evento-acoes button {
+    min-height: 34px;
+    padding: 6px 9px;
+    font-size: 0.8rem;
+}
+
+.evento-vazio {
+    margin: 0;
+    padding: 18px 12px;
+    border: 1px dashed var(--lilas-suave);
+    border-radius: 8px;
+    text-align: center;
+}
+
+#status-calendario {
+    min-height: 1.2em;
+    margin: 8px 0 0;
+    color: var(--roxo-lunar);
+    font-size: 0.84rem;
+}
+
+@media (max-width: 640px) {
+    .container-calendario {
+        margin-top: 24px;
+    }
+
+    .painel-calendario,
+    .area-eventos {
+        padding: 16px 12px;
+    }
+
+    .topo-mes,
+    .cabecalho-eventos {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .grade-calendario {
+        gap: 3px;
+    }
+
+    .dia-calendario {
+        height: 48px;
+        border-radius: 6px;
+    }
+
+    .cabecalho-semana,
+    .numero-dia {
+        font-size: 0.72rem;
+    }
+
+    .evento-card {
+        flex-direction: column;
+    }
+}

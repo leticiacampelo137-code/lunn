@@ -1,0 +1,178 @@
+/* ===== LOGIN E CADASTRO — LUNN ===== */
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 15px;
+    gap: 24px;
+    background: var(--branco);
+}
+
+/* Logotipo */
+
+.auth-container .logotipo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--roxo-noturno);
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.auth-container .logotipo img {
+    width: 40px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Cartão principal */
+
+.auth-card {
+    width: 90%;
+    max-width: 430px; /* largura */
+    padding: 30px;
+    background: var(--branco);
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 48%, transparent);
+    border-radius: 18px;
+    box-shadow: 0 12px 35px color-mix(in srgb, var(--roxo-noturno) 8%, transparent);
+}
+
+.auth-card h1 {
+    color: var(--roxo-noturno);
+    font-size: 27px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.auth-card > p {
+    color: color-mix(in srgb, var(--roxo-noturno) 68%, transparent);
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Campos do formulário */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.form-group label {
+    color: var(--roxo-noturno);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 13px 14px;
+    font-size: 15px;
+    color: var(--roxo-noturno);
+    background: var(--branco);
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 48%, transparent);
+    border-radius: 9px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input::placeholder {
+    color: color-mix(in srgb, var(--roxo-noturno) 48%, transparent);
+}
+
+.form-group input:focus {
+    border-color: var(--roxo-lunar);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--roxo-lunar) 20%, transparent);
+}
+
+/* Botão principal */
+
+.auth-button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 5px;
+    color: var(--branco);
+    background: var(--roxo-lunar);
+    border: none;
+    border-radius: 9px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.auth-button:hover {
+    background: var(--roxo-noturno);
+    transform: translateY(-1px);
+}
+
+/* Links inferiores */
+
+.auth-card .auth-footer {
+    margin: 20px 0 12px;
+    color: color-mix(in srgb, var(--roxo-noturno) 68%, transparent);
+    font-size: 14px;
+    text-align: center;
+}
+
+.auth-footer a,
+.back-link {
+    color: var(--roxo-lunar);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-footer a:hover,
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.back-link {
+    display: block;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Acessibilidade: navegação por teclado */
+
+.auth-footer a:focus-visible,
+.back-link:focus-visible,
+.auth-button:focus-visible {
+    outline: 3px solid var(--lilas-suave);
+    outline-offset: 3px;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 24px 16px;
+        gap: 20px;
+    }
+
+    .auth-container .logotipo {
+        font-size: 30px;
+    }
+
+    .auth-container .logotipo img {
+        width: 38px;
+        height: 38px;
+    }
+
+    .auth-card {
+        padding: 25px 20px;
+        border-radius: 14px;
+    }
+
+    .auth-card h1 {
+        font-size: 23px;
+    }
+}

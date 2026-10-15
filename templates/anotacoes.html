@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anotações | Lunn</title>
+    <link rel="stylesheet" href="{% static 'arquivos de css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'arquivos de css/anotacoes.css' %}">
+    <script src="{% static 'arquivos de js/anotacao_django.js' %}" defer></script>
+</head>
+<body>
+    <header>
+        <a class="logotipo" href="{% url 'index' %}">
+            <img src="{% static 'img/logo.png' %}" alt="Logo do Lunn"> Lunn
+        </a>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{% url 'pagina_lunnia' %}">LunnIA</a></li>
+                <li><a href="{% url 'pagina_pomodoro' %}"><img src="{% static 'img/timer.png' %}" alt=""></a></li>
+            </ul>
+        </nav>
+
+        <a href="{% url 'pagina_inicial' %}"><button>Sair</button></a>
+    </header>
+
+    <main class="area-anotacoes">
+        <section class="cabecalho-anotacoes">
+            <div>
+                <span class="etiqueta">CADERNO</span>
+                <h1>Minhas anotações</h1>
+            </div>
+        </section>
+
+        <section class="painel-materias">
+            <div class="topo-painel">
+                <h2>Matérias</h2>
+                <form id="form-materia" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="acao" value="criar_materia">
+                    <label class="visualmente-oculto" for="{{ materia_form.nome.id_for_label }}">Nome da matéria</label>
+                    {{ materia_form.nome }}
+                    <label class="visualmente-oculto" for="{{ materia_form.cor.id_for_label }}">Cor da matéria</label>
+                    {{ materia_form.cor }}
+                    <button type="submit">Adicionar</button>
+                    {% if materia_form.errors %}<div class="erros-formulario">{{ materia_form.errors }}</div>{% endif %}
+                </form>
+            </div>
+
+            <div class="lista-materias">
+                {% for materia in materias %}
+                    <article class="materia-card {% if materia_selecionada.pk == materia.pk %}ativa{% endif %}">
+                        <a class="materia-circulo" data-cor="{{ materia.cor }}" href="?materia={{ materia.pk }}" aria-label="Abrir {{ materia.nome }}">
+                            {{ materia.nome|first|upper }}
+                        </a>
+                        <a class="materia-nome" href="?materia={{ materia.pk }}">{{ materia.nome }}</a>
+                        <details class="editar-materia" {% if materia_em_edicao == materia.pk %}open{% endif %}>
+                            <summary>Editar</summary>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="acao" value="editar_materia">
+                                <input type="hidden" name="materia_id" value="{{ materia.pk }}">
+                                <label for="nome-materia-{{ materia.pk }}">Nome</label>
+                                {% if materia_edicao_form and materia_em_edicao == materia.pk %}
+                                    {{ materia_edicao_form.nome.errors }}
+                                    <input id="nome-materia-{{ materia.pk }}" type="text" name="nome" value="{{ materia_edicao_form.nome.value|default_if_none:materia.nome }}" maxlength="40" required>
+                                {% else %}
+                                    <input id="nome-materia-{{ materia.pk }}" type="text" name="nome" value="{{ materia.nome }}" maxlength="40" required>
+                                {% endif %}
+                                <label for="cor-materia-{{ materia.pk }}">Cor</label>
+                                {% if materia_edicao_form and materia_em_edicao == materia.pk %}
+                                    {{ materia_edicao_form.cor.errors }}
+                                    <input id="cor-materia-{{ materia.pk }}" type="color" name="cor" value="{{ materia_edicao_form.cor.value|default_if_none:materia.cor }}" required>
+                                {% else %}
+                                    <input id="cor-materia-{{ materia.pk }}" type="color" name="cor" value="{{ materia.cor }}" required>
+                                {% endif %}
+                                <button type="submit">Salvar matéria</button>
+                            </form>
+                        </details>
+                        <form method="post" data-confirm="Excluir esta matéria e todas as suas anotações?">
+                            {% csrf_token %}
+                            <input type="hidden" name="acao" value="excluir_materia">
+                            <input type="hidden" name="materia_id" value="{{ materia.pk }}">
+                            <button class="botao-secundario" type="submit">Excluir</button>
+                        </form>
+                    </article>
+                {% empty %}
+                    <p class="vazio">Nenhuma matéria cadastrada.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        {% if materia_selecionada %}
+            <section class="layout-editor">
+                <aside class="painel-anotacoes">
+                    <div class="topo-painel">
+                        <h2>{{ materia_selecionada.nome }}</h2>
+                        <a class="botao-nova-anotacao" href="?materia={{ materia_selecionada.pk }}#editor-anotacao">Nova</a>
+                    </div>
+                    <div id="lista-anotacoes">
+                        {% for anotacao in anotacoes %}
+                            <a class="item-anotacao {% if anotacao_selecionada.pk == anotacao.pk %}ativa{% endif %}" href="?materia={{ materia_selecionada.pk }}&anotacao={{ anotacao.pk }}#editor-anotacao">
+                                <strong>{{ anotacao.titulo }}</strong>
+                                <span>{{ anotacao.conteudo|striptags|truncatechars:80 }}</span>
+                            </a>
+                        {% empty %}
+                            <p class="vazio">Nenhuma anotação nesta matéria.</p>
+                        {% endfor %}
+                    </div>
+                </aside>
+
+                <section class="editor-anotacao" id="editor-anotacao">
+                    <form id="form-anotacao" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="acao" value="salvar_anotacao">
+                        <input type="hidden" name="materia_id" value="{{ materia_selecionada.pk }}">
+                        {% if anotacao_selecionada %}
+                            <input type="hidden" name="anotacao_id" value="{{ anotacao_selecionada.pk }}">
+                        {% endif %}
+
+                        <label for="{{ anotacao_form.titulo.id_for_label }}">Título</label>
+                        {{ anotacao_form.titulo }}
+                        {{ anotacao_form.titulo.errors }}
+
+                        <div class="barra-editor" aria-label="Ferramentas do editor">
+                            <button type="button" data-comando="bold"><strong>B</strong></button>
+                            <button type="button" data-comando="italic"><em>I</em></button>
+                            <button type="button" data-comando="underline"><u>U</u></button>
+                            <button type="button" data-comando="insertUnorderedList">Lista</button>
+                            <button type="button" data-comando="insertOrderedList">1.</button>
+                            <button type="button" data-comando="formatBlock" data-valor="blockquote">Marcador</button>
+                            <select id="fonte-editor" aria-label="Fonte">
+                                <option value="Rubik">Rubik</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Courier New">Courier</option>
+                            </select>
+                        </div>
+
+                        <label for="conteudo">Anotação</label>
+                        <div id="conteudo" class="campo-editor" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="Escreva sua anotação..."></div>
+                        {{ anotacao_form.conteudo }}
+                        {{ anotacao_form.conteudo.errors }}
+
+                        <div class="acoes-editor">
+                            <button type="submit">{% if anotacao_selecionada %}Salvar alterações{% else %}Salvar anotação{% endif %}</button>
+                        </div>
+                    </form>
+                    {% if anotacao_selecionada %}
+                        <form method="post" data-confirm="Excluir esta anotação?">
+                            {% csrf_token %}
+                            <input type="hidden" name="acao" value="excluir_anotacao">
+                            <input type="hidden" name="anotacao_id" value="{{ anotacao_selecionada.pk }}">
+                            <button class="botao-secundario" type="submit">Excluir anotação</button>
+                        </form>
+                    {% endif %}
+                </section>
+            </section>
+        {% else %}
+            <p class="vazio">Crie ou selecione uma matéria para começar.</p>
+        {% endif %}
+    </main>
+    {{ conteudo_inicial|json_script:"conteudo-inicial" }}
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro | Lunn</title>
+    <link rel="stylesheet" href="{% static 'arquivos de css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'arquivos de css/pomodoro.css' %}">
+    <script src="{% static 'arquivos de js/pomodoro.js' %}" defer></script>
+</head>
+
+<body>
+    <header>
+        <a class="logotipo" href="{% url 'index' %}">
+    <img src="{% static 'img/logo.png' %}" alt="Logo do Lunn"> Lunn
+</a>
+        <nav>
+        <ul class="nav-links">
+            <li><a href="{% url 'pagina_lunnia' %}">LunnIA</a></li>
+        </ul>
+        </nav>
+        <a href="{% url 'pagina_inicial' %}"><button id="sair">Sair</button></a>
+    </header>
+    <main class="pomodoro" data-save-url="{% url 'registrar_sessao_pomodoro' %}">
+            <h2 id="conometro">
+                25:00
+            </h2>
+            <div id="botoes"> 
+            <button id="start" type="button" value="start"><img src="{% static 'img/play.png' %}" alt="Iniciar"></button>
+            <button id="stop" type="button"><img src="{% static 'img/pause.png' %}" alt="Pausar"></button>
+            <button id="reset" type="button"><img src="{% static 'img/timer-reset.png' %}" alt="Resetar"></button>
+            </div>
+            <div id="adicionar">
+                <select name="jornada" id="jornadas">
+    <option value="60" data-descansos="2" data-descanso="5">
+        60 minutos, 2 pausas
+    </option>
+
+    <option value="90" data-descansos="3" data-descanso="5">
+        90 minutos, 3 pausas
+    </option>
+
+    <option value="120" data-descansos="4" data-descanso="5">
+        120 minutos, 4 pausas
+    </option>
+</select>
+        </div>
+    <p id="status-sessao" role="status" aria-live="polite"></p>
+    <form id="csrf-pomodoro" hidden>{% csrf_token %}</form>
+    </main> 
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área de estudos | Lunn</title>
+    <link rel="stylesheet" href="{% static 'arquivos de css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'arquivos de css/style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" defer></script>
+    <script src="{% static 'arquivos de js/launch.js' %}" defer></script>
+    <script src="{% static 'arquivos de js/dashboard.js' %}" defer></script>
+</head>
+<body>
+    <header>
+        <a class="logotipo" href="{% url 'index' %}">
+            <img src="{% static 'img/logo.png' %}" alt="Logo do Lunn"> Lunn
+        </a>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{% url 'pagina_lunnia' %}">LunnIA</a></li>
+                <li><a href="{% url 'pagina_pomodoro' %}"><img src="{% static 'img/timer.png' %}" alt="Pomodoro"></a></li>
+            </ul>
+        </nav>
+
+        <a href="{% url 'pagina_inicial' %}"><button>Sair</button></a>
+    </header>
+
+    <main class="area-index">
+        <nav class="nav-atalhosp">
+            <span class="cumprimento">Olá, {{ request.user.first_name|default:"estudante" }}</span>
+
+            <section class="materias-index" aria-label="Matérias">
+                <div class="topo-secao">
+                    <h2>Matérias</h2>
+                    <a href="{% url 'pagina_anotacoes' %}">Gerenciar</a>
+                </div>
+                <div class="lista-materias-index">
+                    {% for materia in materias %}
+                        <a class="materia-bolha" href="{% url 'pagina_anotacoes' %}?materia={{ materia.pk }}">
+                            <span class="materia-capa" data-cor="{{ materia.cor }}">{{ materia.nome|first|upper }}</span>
+                            <span>{{ materia.nome }}</span>
+                        </a>
+                    {% empty %}
+                        <p class="vazio-card">Nenhuma matéria cadastrada.</p>
+                    {% endfor %}
+                </div>
+                <form class="materia-rapida" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="acao" value="criar_materia">
+                    <div>
+                        <label for="{{ materia_form.nome.id_for_label }}">Nova matéria</label>
+                        {{ materia_form.nome }}
+                        {{ materia_form.nome.errors }}
+                    </div>
+                    <div>
+                        <label for="{{ materia_form.cor.id_for_label }}">Cor</label>
+                        {{ materia_form.cor }}
+                        {{ materia_form.cor.errors }}
+                    </div>
+                    <button type="submit">Adicionar</button>
+                </form>
+            </section>
+
+            <ul>
+                <li class="calendario">
+                    <div class="card-cabecalho">
+                        <h2>Programação da semana</h2>
+                        <a class="botao-card" href="{% url 'pagina_calendario' %}">Calendário mensal</a>
+                    </div>
+                    <div class="agenda-semana">
+                        {% for evento in eventos_semana %}
+                            <article class="agenda-item">
+                                <strong>{{ evento.titulo }}</strong>
+                                <span>{{ evento.data|date:"d/m" }}{% if evento.horario %} às {{ evento.horario|time:"H:i" }}{% endif %}{% if evento.materia %} · {{ evento.materia.nome }}{% elif evento.materia_nome %} · {{ evento.materia_nome }}{% endif %}</span>
+                            </article>
+                        {% empty %}
+                            <p class="vazio-card">Sem eventos nos próximos sete dias.</p>
+                        {% endfor %}
+                    </div>
+                </li>
+
+                <li class="cartao-tarefas task-board">
+                    <div class="card-cabecalho">
+                        <div class="task-board__title">
+                            <span class="task-eyebrow">ORGANIZAÇÃO</span>
+                            <h2>Tarefas</h2>
+                        </div>
+                        <p class="task-count">
+                            <strong>{{ tarefas|length }}</strong>
+                            <span>itens</span>
+                        </p>
+                    </div>
+
+                    <form class="form-tarefa" id="form-tarefa" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="acao" value="{% if editando %}editar{% else %}criar{% endif %}">
+                        {% if editando %}
+                            <input type="hidden" name="tarefa_id" value="{{ editando }}">
+                        {% endif %}
+                        {{ form.as_p }}
+                        <div class="form-tarefa__acoes">
+                            <button type="submit">{% if editando %}Salvar alterações{% else %}Salvar tarefa{% endif %}</button>
+                            {% if editando %}<a href="{% url 'index' %}">Cancelar</a>{% endif %}
+                        </div>
+                    </form>
+
+                    <ul class="tarefas-django">
+                        {% for tarefa in tarefas %}
+                            <li>
+                                <div class="tarefa-resumo">
+                                    <strong>{{ tarefa.nome }}</strong>
+                                    {% if tarefa.descricao %}<span>{{ tarefa.descricao }}</span>{% endif %}
+                                </div>
+                                <div class="tarefa-acoes">
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="acao" value="alternar_status">
+                                        <input type="hidden" name="tarefa_id" value="{{ tarefa.pk }}">
+                                        <button
+                                            type="submit"
+                                            class="tarefa-status {% if tarefa.completo %}is-complete{% else %}is-pending{% endif %}"
+                                            aria-label="{% if tarefa.completo %}Reabrir{% else %}Marcar como concluída{% endif %}: {{ tarefa.nome }}"
+                                        >{% if tarefa.completo %}Concluída{% else %}Pendente{% endif %}</button>
+                                    </form>
+                                    <a class="tarefa-editar" href="{% url 'index' %}?editar={{ tarefa.pk }}#form-tarefa">Editar</a>
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="acao" value="excluir">
+                                        <input type="hidden" name="tarefa_id" value="{{ tarefa.pk }}">
+                                        <button class="tarefa-excluir" type="submit">Excluir</button>
+                                    </form>
+                                </div>
+                            </li>
+                        {% empty %}
+                            <li class="vazio-card">Nenhuma tarefa cadastrada.</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+
+                <li class="cartao-anotacoes">
+                    <div class="card-cabecalho">
+                            <h2>Anotações</h2>
+                        <a class="botao-card" href="{% url 'pagina_anotacoes' %}">Abrir</a>
+                    </div>
+                    <div class="ultimas-anotacoes">
+                        {% for anotacao in ultimas_anotacoes %}
+                            <a class="anotacao-resumo" href="{% url 'pagina_anotacoes' %}?materia={{ anotacao.materia_id }}&anotacao={{ anotacao.pk }}">
+                                <span class="anotacao-materia">{{ anotacao.materia.nome }}</span>
+                                <strong>{{ anotacao.titulo }}</strong>
+                                <p>{{ anotacao.conteudo|striptags|truncatechars:90 }}</p>
+                                <time datetime="{{ anotacao.atualizada_em|date:'c' }}">{{ anotacao.atualizada_em|date:'d/m/Y' }}</time>
+                            </a>
+                        {% empty %}
+                            <p class="vazio-card">Nenhuma anotação salva.</p>
+                        {% endfor %}
+                    </div>
+                </li>
+
+                <li class="card-dashboard">
+                    <div class="dashboard-card__header">
+                        <div>
+                            <span class="dashboard-eyebrow">ÚLTIMOS SETE DIAS</span>
+                            <h2>Foco Pomodoro</h2>
+                        </div>
+                        <div class="dashboard-total">
+                            <strong>{{ total_minutos }}</strong>
+                            <span>minutos</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-chart-wrap">
+                        <canvas id="grafico-pomodoro" role="img" aria-label="Gráfico de minutos de foco por dia"></canvas>
+                    </div>
+                    <p class="dashboard-sessions">{{ total_sessoes }} sessões registradas</p>
+                </li>
+            </ul>
+        </nav>
+    </main>
+    {{ grafico_pomodoro|json_script:"dados-pomodoro" }}
+</body>
+</html>

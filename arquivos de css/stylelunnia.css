@@ -1,0 +1,278 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--branco);
+    color: var(--roxo-noturno);
+    font-family: "Rubik", sans-serif;
+}
+
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 16px max(3vw, 20px);
+    background: var(--roxo-noturno);
+}
+
+.site-header a {
+    color: var(--branco);
+    text-decoration: none;
+}
+
+.site-header .logotipo {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.site-header .logotipo img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+}
+
+.site-header nav {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.site-header nav a,
+.logout-link {
+    font-size: 0.92rem;
+}
+
+.site-header nav a:hover,
+.logout-link:hover {
+    color: var(--lilas-suave);
+}
+
+.lunnia-page {
+    width: min(900px, 94%);
+    margin: 38px auto 60px;
+}
+
+.lunnia-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.eyebrow {
+    color: var(--roxo-lunar);
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.lunnia-heading h1 {
+    margin: 5px 0 0;
+    font-size: 1.8rem;
+}
+
+.assistant-state {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--roxo-noturno);
+    font-size: 0.86rem;
+}
+
+.assistant-state span {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--roxo-lunar);
+}
+
+.conversation {
+    display: flex;
+    flex-direction: column;
+    min-height: min(70vh, 720px);
+    padding: 22px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 55%, transparent);
+    border-radius: 10px;
+    background: var(--branco);
+}
+
+.conversation-log {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 14px;
+    overflow-y: auto;
+    padding: 4px 2px 20px;
+}
+
+.chat-message {
+    width: fit-content;
+    max-width: min(78%, 680px);
+    padding: 13px 16px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 45%, transparent);
+    border-radius: 9px;
+    background: color-mix(in srgb, var(--lilas-suave) 18%, var(--branco));
+    overflow-wrap: anywhere;
+}
+
+.user-message {
+    align-self: flex-end;
+    border-color: var(--roxo-lunar);
+    background: var(--roxo-lunar);
+    color: var(--branco);
+}
+
+.message-author {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--roxo-lunar);
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.user-message .message-author {
+    color: var(--branco);
+}
+
+.chat-message p {
+    margin: 0;
+    line-height: 1.55;
+    white-space: pre-wrap;
+}
+
+.suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 14px;
+}
+
+.suggestions button {
+    min-height: 34px;
+    padding: 6px 11px;
+    border: 1px solid var(--lilas-suave);
+    border-radius: 7px;
+    background: var(--branco);
+    color: var(--roxo-noturno);
+    font: inherit;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.suggestions button:hover {
+    background: color-mix(in srgb, var(--lilas-suave) 25%, var(--branco));
+}
+
+.message-form {
+    display: flex;
+    align-items: end;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid var(--lilas-suave);
+    border-radius: 9px;
+    background: var(--branco);
+}
+
+.message-form textarea {
+    flex: 1;
+    min-width: 0;
+    max-height: 150px;
+    padding: 9px 10px;
+    border: 0;
+    outline: 0;
+    resize: none;
+    background: transparent;
+    color: var(--roxo-noturno);
+    font: inherit;
+    line-height: 1.45;
+}
+
+.message-form textarea::placeholder {
+    color: color-mix(in srgb, var(--roxo-noturno) 55%, transparent);
+}
+
+.message-form button {
+    min-width: 84px;
+    height: 40px;
+    border: 0;
+    border-radius: 7px;
+    background: var(--roxo-lunar);
+    color: var(--branco);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.message-form button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+.form-status,
+.privacy-note {
+    min-height: 1.2em;
+    margin: 8px 2px 0;
+    color: color-mix(in srgb, var(--roxo-noturno) 68%, transparent);
+    font-size: 0.78rem;
+}
+
+.privacy-note {
+    min-height: 0;
+    margin-top: 2px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.message-form button:focus-visible,
+.suggestions button:focus-visible,
+.site-header a:focus-visible {
+    outline: 3px solid var(--lilas-suave);
+    outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+    .site-header {
+        flex-wrap: wrap;
+        padding: 14px 4%;
+    }
+
+    .site-header nav {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .lunnia-page {
+        margin-top: 24px;
+    }
+
+    .lunnia-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .conversation {
+        min-height: 68vh;
+        padding: 14px;
+    }
+
+    .chat-message {
+        max-width: 92%;
+    }
+
+    .message-form button {
+        min-width: 72px;
+    }
+}

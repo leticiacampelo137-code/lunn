@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Rubik", sans-serif;
+}
+
+:root {
+    --roxo-noturno: #17152F;
+    --roxo-lunar: #7556D9;
+    --branco: #F6F5FB;
+    --lilas-suave: #B9A7F5;
+}
+
+header,
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 15px;
+    background: var(--roxo-noturno);
+}
+
+header .logotipo,
+.site-header .logotipo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--branco);
+    font-size: 35px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+header .logotipo img,
+.site-header .logotipo img {
+    width: auto;
+    height: 45px;
+    object-fit: contain;
+}
+
+header nav,
+.site-header nav {
+    display: flex;
+    align-items: center;
+}
+
+.site-header nav {
+    gap: 22px;
+}
+
+.nav-links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-links li {
+    display: inline-block;
+    padding: 0 20px;
+}
+
+.nav-links a,
+.site-header nav a {
+    color: var(--lilas-suave);
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.nav-links a:hover,
+.site-header nav a:hover {
+    color: var(--branco);
+}
+
+header > a:last-child button,
+#sair,
+.site-header .logout-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--roxo-lunar);
+    color: var(--branco);
+    font: inherit;
+    font-size: 18px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+header > a:last-child button:hover,
+#sair:hover,
+.site-header .logout-link:hover {
+    background: var(--roxo-noturno);
+    color: var(--branco);
+}
+
+@media (max-width: 800px) {
+    header,
+    .site-header {
+        padding: 15px;
+    }
+
+    header .logotipo,
+    .site-header .logotipo {
+        font-size: 20px;
+    }
+
+    header .logotipo img,
+    .site-header .logotipo img {
+        height: 32px;
+    }
+
+    .nav-links li {
+        padding: 0 8px;
+    }
+
+    .nav-links a,
+    .site-header nav a,
+    header > a:last-child button,
+    #sair,
+    .site-header .logout-link {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 640px) {
+    .site-header {
+        flex-wrap: wrap;
+    }
+
+    .site-header nav {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+    }
+}

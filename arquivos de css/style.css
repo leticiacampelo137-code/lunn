@@ -1,0 +1,549 @@
+li, a, button {
+    font-size: 18px;
+    color: var(--lilas-suave);
+    text-decoration: none;
+}
+
+body {
+    background: var(--branco);
+}
+
+button{
+    color: var(--branco);
+    background: var(--roxo-lunar);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: var(--roxo-noturno);
+}
+
+.area-index {
+    width: min(1100px, 94%);
+    margin: 30px auto 60px;
+}
+
+.nav-atalhosp {
+    display: grid;
+    gap: 22px;
+}
+
+.cumprimento{
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--roxo-noturno);
+}
+
+.topo-secao,
+.card-cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.topo-secao h2,
+.card-cabecalho h2 {
+    color: var(--roxo-noturno);
+    font-size: 1.1rem;
+}
+
+.topo-secao a,
+.botao-card {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: var(--roxo-lunar);
+    color: var(--branco);
+    font-size: 0.9rem;
+}
+
+.materias-index {
+    display: grid;
+    gap: 16px;
+    padding: 22px;
+    border-radius: 10px;
+    background: transparent;
+}
+
+.lista-materias-index {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.materia-rapida {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 52px auto;
+    align-items: end;
+    gap: 10px;
+    padding: 14px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 48%, transparent);
+    border-radius: 10px;
+    background: var(--branco);
+}
+
+.materia-rapida label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--roxo-noturno);
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.materia-rapida input[type="text"] {
+    width: 100%;
+    min-height: 40px;
+    padding: 8px 10px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 48%, transparent);
+    border-radius: 8px;
+    background: var(--branco);
+    color: var(--roxo-noturno);
+    font: inherit;
+}
+
+.materia-rapida input[type="color"] {
+    width: 52px;
+    height: 40px;
+    padding: 4px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 48%, transparent);
+    border-radius: 8px;
+    background: var(--branco);
+}
+
+.materia-rapida .errorlist {
+    color: var(--roxo-lunar);
+    font-size: 0.78rem;
+    list-style: none;
+}
+
+.materia-bolha {
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    min-width: 92px;
+    color: var(--roxo-noturno);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.materia-capa {
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    border: 3px solid color-mix(in srgb, var(--branco) 80%, transparent);
+    border-radius: 50%;
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--roxo-noturno) 12%, transparent);
+    color: var(--branco);
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.nav-atalhosp > ul{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    list-style: none;
+}
+
+.nav-atalhosp > ul > li{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 220px;
+    padding: 24px;
+    border: 1px solid var(--lilas-suave);
+    border-radius: 10px;
+    background: var(--branco);
+}
+
+.nav-atalhosp > ul > li:hover{
+    border-color: var(--roxo-noturno);
+    transition: 0.3s;
+}
+
+.calendario,
+.card-dashboard {
+    grid-column: 1 / -1;
+}
+
+.card-dashboard {
+    min-height: 360px;
+}
+
+.dashboard-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.dashboard-eyebrow {
+    color: var(--roxo-lunar);
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.dashboard-card__header h2 {
+    margin-top: 4px;
+    color: var(--roxo-noturno);
+}
+
+.dashboard-total {
+    display: grid;
+    justify-items: end;
+    color: var(--roxo-noturno);
+}
+
+.dashboard-total strong {
+    font-size: 1.5rem;
+}
+
+.dashboard-total span,
+.dashboard-sessions {
+    color: color-mix(in srgb, var(--roxo-noturno) 68%, transparent);
+    font-size: 0.82rem;
+}
+
+.dashboard-chart-wrap {
+    position: relative;
+    height: 240px;
+    margin-top: 18px;
+}
+
+.dashboard-sessions {
+    margin-top: 12px;
+}
+
+.agenda-semana,
+.ultimas-anotacoes,
+.tarefas-django {
+    display: grid;
+    gap: 10px;
+    list-style: none;
+}
+
+.agenda-item,
+.anotacao-resumo,
+.tarefas-django li {
+    padding: 12px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 48%, transparent);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--lilas-suave) 14%, var(--branco));
+}
+
+.agenda-item {
+    display: grid;
+    gap: 4px;
+}
+
+.agenda-item strong,
+.anotacao-resumo strong,
+.tarefas-django span {
+    color: var(--roxo-noturno);
+}
+
+.agenda-item span,
+.anotacao-resumo p,
+.vazio-card {
+    color: color-mix(in srgb, var(--roxo-noturno) 68%, transparent);
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
+.anotacao-materia,
+.anotacao-resumo time {
+    color: var(--roxo-lunar);
+    font-size: 0.76rem;
+    font-weight: 600;
+}
+
+.anotacao-resumo time {
+    color: color-mix(in srgb, var(--roxo-noturno) 68%, transparent);
+    font-weight: 400;
+}
+
+.cartao-tarefas,
+.cartao-anotacoes {
+    min-height: 280px;
+}
+
+.cartao-tarefas.task-board {
+    border-color: var(--lilas-suave);
+    background: var(--branco);
+}
+
+.task-board .card-cabecalho {
+    align-items: center;
+}
+
+.task-board__title {
+    display: grid;
+    gap: 4px;
+}
+
+.task-board .card-cabecalho h2 {
+    color: var(--roxo-noturno);
+    font-size: 1.1rem;
+}
+
+.task-eyebrow {
+    color: var(--roxo-lunar);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.task-count {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 8px 11px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 48%, transparent);
+    border-radius: 8px;
+    background: var(--branco);
+    color: var(--roxo-noturno);
+}
+
+.task-count strong {
+    font-size: 1.1rem;
+}
+
+.task-count span {
+    font-size: 0.76rem;
+    font-weight: 600;
+}
+
+.form-tarefa {
+    display: grid;
+    gap: 4px;
+    padding: 16px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 48%, transparent);
+    border-radius: 8px;
+    background: var(--branco);
+}
+
+.form-tarefa p {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.form-tarefa label {
+    color: var(--roxo-noturno);
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.form-tarefa input:not([type="checkbox"]),
+.form-tarefa textarea,
+.form-tarefa select {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 12px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 48%, transparent);
+    border-radius: 9px;
+    background: var(--branco);
+    color: var(--roxo-noturno);
+    font-size: 0.95rem;
+}
+
+.form-tarefa textarea {
+    min-height: 84px;
+    resize: vertical;
+}
+
+.form-tarefa input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--roxo-lunar);
+}
+
+.form-tarefa button {
+    min-height: 42px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+}
+
+.form-tarefa__acoes {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-tarefa__acoes a {
+    color: var(--roxo-lunar);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.form-tarefa input:focus-visible,
+.form-tarefa textarea:focus-visible,
+.form-tarefa select:focus-visible,
+.form-tarefa button:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--roxo-lunar) 35%, transparent);
+    outline-offset: 2px;
+}
+
+.form-tarefa .errorlist {
+    color: var(--roxo-lunar);
+    font-size: 0.85rem;
+    list-style: none;
+}
+
+.tarefas-django li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+}
+
+.tarefas-django li > div {
+    display: grid;
+    gap: 4px;
+}
+
+.tarefa-resumo {
+    overflow-wrap: anywhere;
+}
+.tarefa-acoes,
+.tarefa-acoes form {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+}
+
+.tarefa-acoes {
+    flex: 0 0 228px;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+}
+
+.tarefa-acoes form {
+    flex: 0 0 auto;
+}
+
+.tarefa-acoes button,
+.tarefa-acoes a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    min-height: 36px;
+    padding: 0 6px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tarefa-acoes .tarefa-status {
+    width: 88px;
+    flex: 0 0 88px;
+    border: 0;
+    cursor: pointer;
+}
+
+.tarefa-acoes .tarefa-editar {
+    width: 64px;
+    flex: 0 0 64px;
+    border: 1px solid color-mix(in srgb, var(--lilas-suave) 48%, transparent);
+    background: var(--branco);
+    color: var(--roxo-lunar);
+}
+
+.tarefa-acoes .tarefa-excluir {
+    width: 64px;
+    flex: 0 0 64px;
+    background: color-mix(in srgb, var(--roxo-lunar) 12%, var(--branco));
+    color: var(--roxo-lunar);
+}
+
+.tarefa-acoes button:focus-visible,
+.tarefa-acoes a:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--roxo-lunar) 35%, transparent);
+    outline-offset: 2px;
+}
+
+.tarefas-django li > div strong {
+    color: var(--roxo-noturno);
+    font-size: 0.95rem;
+}
+
+.tarefas-django .tarefa-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 9px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tarefas-django .is-complete {
+    background: color-mix(in srgb, var(--lilas-suave) 38%, var(--branco));
+    color: var(--roxo-noturno);
+}
+
+.tarefas-django .is-pending {
+    background: color-mix(in srgb, var(--lilas-suave) 20%, var(--branco));
+    color: var(--roxo-lunar);
+}
+
+.tarefas-django .vazio-card {
+    display: block;
+    border-style: dashed;
+    background: transparent;
+}
+
+@media (max-width: 800px){
+    li, a, button {
+        font-size: 14px;
+    }
+
+    .nav-atalhosp > ul {
+        grid-template-columns: 1fr;
+    }
+
+    .tarefas-django li {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .tarefa-acoes {
+        justify-content: flex-start;
+    }
+
+    .dashboard-chart-wrap {
+        height: 210px;
+    }
+
+    .materia-rapida {
+        grid-template-columns: minmax(0, 1fr) 52px;
+    }
+
+    .materia-rapida button {
+        grid-column: 1 / -1;
+    }
+
+    .topo-secao,
+    .card-cabecalho {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .botao-card,
+    .topo-secao a {
+        width: 100%;
+    }
+}
+

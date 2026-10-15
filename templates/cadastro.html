@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar conta | Lunn</title>
+    <link rel="stylesheet" href="{% static 'arquivos de css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'arquivos de css/stylelongi.css' %}">
+</head>
+<body>
+     <main class="auth-container">
+        <div class="logotipo">
+            <img src="{% static 'img/1791575863547.png' %}" alt="Logo do Lunn">
+            Lunn
+        </div>
+
+        <section class="auth-card">
+            <h1>Crie sua conta</h1>
+            <p>Organize seus estudos no seu ritmo.</p>
+
+            <form id="form-cadastro" method="post">
+                {% csrf_token %}
+                {% if error %}
+                    <p>{{ error }}</p>
+                {% endif %}
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Como podemos te chamar?"
+                        autocomplete="name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu e-mail"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input
+                        type="password"
+                        id="senha"
+                        name="senha"
+                        placeholder="Crie uma senha"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmar-senha">Confirmar senha</label>
+                    <input
+                        type="password"
+                        id="confirmar-senha"
+                        name="confirmar-senha"
+                        placeholder="Digite a senha novamente"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="auth-button">
+                    Criar conta
+                </button>
+            </form>
+
+            <p class="auth-footer">
+                Já tem uma conta?
+                <a href="{% url 'pagina_inicial' %}">Entrar</a>
+            </p>
+        </section>
+    </main>
+</body>
+</html>

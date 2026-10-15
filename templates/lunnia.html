@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunnIA | Lunn</title>
+    <link rel="stylesheet" href="{% static 'arquivos de css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'arquivos de css/stylelunnia.css' %}">
+    <script src="{% static 'arquivos de js/lunnia.js' %}" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <a class="logotipo" href="{% url 'index' %}">
+            <img src="{% static 'img/logo.png' %}" alt="">
+            <span>Lunn</span>
+        </a>
+        <nav aria-label="Navegação principal">
+            <a href="{% url 'pagina_calendario' %}">Calendário</a>
+            <a href="{% url 'pagina_pomodoro' %}"><img src="{% static 'img/timer.png' %}" alt=""></a>
+        </nav>
+        <a class="logout-link" href="{% url 'pagina_inicial' %}">Sair</a>
+    </header>
+
+    <main class="lunnia-page">
+        <div class="lunnia-heading">
+            <div>
+                <span class="eyebrow">ASSISTENTE DE ESTUDOS</span>
+                <h1>LunnIA</h1>
+            </div>
+            <span class="assistant-state"><span aria-hidden="true"></span> Pronta para ajudar</span>
+        </div>
+
+        <section class="conversation" aria-label="Conversa com a LunnIA">
+            <div class="conversation-log" id="conversa" aria-live="polite">
+                <article class="chat-message assistant-message">
+                    <span class="message-author">LunnIA</span>
+                    <p>Olá! Posso ajudar a organizar seus estudos, explicar um assunto ou montar um plano de revisão. O que você está estudando?</p>
+                </article>
+            </div>
+
+            <div class="suggestions" aria-label="Sugestões de perguntas">
+                <button type="button" data-sugestao="Monte um plano de estudos de 30 minutos para hoje.">Plano de estudos</button>
+                <button type="button" data-sugestao="Explique um conceito difícil passo a passo.">Explicar um conceito</button>
+                <button type="button" data-sugestao="Crie perguntas para eu revisar o conteúdo que estudei.">Perguntas de revisão</button>
+            </div>
+
+            <form class="message-form" id="form-lunnia" data-endpoint="{% url 'responder_lunnia' %}" method="post">
+                {% csrf_token %}
+                <label class="visually-hidden" for="mensagem">Sua mensagem</label>
+                <textarea id="mensagem" name="mensagem" rows="1" maxlength="3000" placeholder="Escreva sua pergunta..." required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+            <p class="form-status" id="status-lunnia" role="status" aria-live="polite"></p>
+            <p class="privacy-note">As mensagens são enviadas ao provedor configurado. Confira informações importantes nas respostas.</p>
+        </section>
+    </main>
+</body>
+</html>

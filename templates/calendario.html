@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário | Lunn</title>
+    <link rel="stylesheet" href="{% static 'arquivos de css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'arquivos de css/calendar.css' %}">
+    <script src="{% static 'arquivos de js/calendario_django.js' %}" defer></script>
+</head>
+<body>
+    <header>
+        <a class="logotipo" href="{% url 'index' %}">
+    <img src="{% static 'img/logo.png' %}" alt="Logo do Lunn"> Lunn
+</a>
+        <nav>
+        <ul class="nav-links">
+            <li><a href="{% url 'pagina_lunnia' %}">LunnIA</a></li>
+            <li><a href="{% url 'pagina_pomodoro' %}"><img src="{% static 'img/timer.png' %}" alt="Pomodoro"></a></li>
+        </ul>
+        </nav>
+        <a href="{% url 'pagina_inicial' %}"><button>Sair</button></a>
+    </header>
+    <main class="container-calendario" data-event-url="{% url 'salvar_evento_calendario' %}">
+
+        <section class="intro-calendario">
+            <span class="etiqueta-calendario">ORGANIZE SUA ROTINA</span>
+            <h1>Calendário de estudos</h1>
+            <p>Planeje provas, trabalhos e sessões de estudo.</p>
+        </section>
+
+        <section class="painel-calendario">
+
+            <div class="topo-mes">
+                <div>
+                    <h2 id="mes-ano">Mês e ano</h2>
+                </div>
+
+                <div class="navegacao-mes">
+                    <button type="button" id="mes-anterior"
+                            aria-label="Mês anterior">‹</button>
+
+                    <button type="button" id="mes-atual">
+                        Hoje
+                    </button>
+
+                    <button type="button" id="mes-proximo"
+                            aria-label="Próximo mês">›</button>
+                </div>
+            </div>
+
+            <div class="grade-calendario"
+                 id="grade-calendario"
+                 aria-label="Calendário mensal">
+            </div>
+
+            <div class="legenda-calendario">
+                <span><i class="ponto prova"></i> Prova</span>
+                <span><i class="ponto trabalho"></i> Trabalho</span>
+                <span><i class="ponto estudo"></i> Estudo</span>
+                <span><i class="ponto outro"></i> Outro</span>
+            </div>
+
+        </section>
+
+        <section class="area-eventos">
+
+            <div class="cabecalho-eventos">
+                <div>
+                    <span class="etiqueta-calendario">AGENDA</span>
+                    <h2 id="titulo-dia">Eventos do dia</h2>
+                </div>
+
+                <button type="button" id="novo-evento"
+                        class="botao-adicionar">
+                    + Novo evento
+                </button>
+            </div>
+
+            <form id="form-evento" hidden>
+                {% csrf_token %}
+                <input type="hidden" id="evento-id" name="evento_id">
+                <input type="hidden" id="evento-acao" name="acao" value="salvar">
+                <h3 id="titulo-formulario">Adicionar evento</h3>
+
+                <label for="evento-titulo">Título</label>
+                <input type="text" id="evento-titulo" name="titulo"
+                       placeholder="Ex.: Prova de Álgebra Linear"
+                       maxlength="100" required>
+
+                <label for="evento-data">Data</label>
+                <input type="date" id="evento-data" name="data" required>
+
+                <label for="evento-horario">Horário (opcional)</label>
+                <input type="time" id="evento-horario" name="horario">
+
+                <label for="evento-tipo">Tipo de evento</label>
+                <select id="evento-tipo" name="tipo" required>
+                    <option value="prova">Prova</option>
+                    <option value="trabalho">Trabalho</option>
+                    <option value="estudo">Sessão de estudo</option>
+                    <option value="outro">Outro</option>
+                </select>
+
+                <label for="evento-materia">Matéria (opcional)</label>
+                <select id="evento-materia" name="materia">
+                    <option value="">Sem matéria vinculada</option>
+                </select>
+
+                <label for="evento-descricao">Descrição (opcional)</label>
+                <textarea id="evento-descricao" name="descricao"
+                          rows="3" maxlength="1000"
+                          placeholder="Detalhes, conteúdo para revisar ou lembretes..."></textarea>
+
+                <div class="acoes-formulario">
+                    <button type="submit" class="botao-adicionar"
+                            id="salvar-evento">
+                        Salvar evento
+                    </button>
+
+                    <button type="button" id="cancelar-evento"
+                            class="botao-cancelar">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+
+            <div id="lista-eventos" class="lista-eventos"></div>
+            <p id="status-calendario" role="status" aria-live="polite"></p>
+
+        </section>
+
+    </main>
+    {{ materias_json|json_script:"materias-calendario" }}
+    {{ eventos_json|json_script:"eventos-calendario" }}
+</body>
+</html>
